@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Slepnac od swiatel",
+        "author": "Jakub Zulczyk",
+        "ISBN": 2137,
+        "num_copies": 29
+    },
+    {
+        "title": "Psy",
+        "author": "Waldemar Morawiec",
+        "ISBN": 123,
+        "num_copies": 5
+    },
+    {
+        "title": "Kordian",
+        "author": "Juliusz Slowacki",
+        "ISBN": 543,
+        "num_copies": 12
+    },
+    {
+        "title": "Dziady",
+        "author": "Adam Mickiewicz",
+        "ISBN": 987,
+        "num_copies": 0
+    }
+]
