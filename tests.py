@@ -4,7 +4,8 @@ from unittest import mock, TestCase
 import os
 import sys
 from book import Book
-from library import Library
+from library import Library, NotificationSystem
+
 
 class TestAddNewBook(unittest.TestCase):
     def test_add_new_book(self):
@@ -44,10 +45,16 @@ class TestLendBook(unittest.TestCase):
     def mocked_return_lend_book(*args, **kwargs):
         return "Book was lended"
     
+    def mocked_send_notification(*args, **kwargs):
+        return "Notification that book was lended"
+    
+    @mock.patch("library.NotificationSystem.send_notification", new=mocked_send_notification)
     @mock.patch("library.Library.lend_book", new=mocked_return_lend_book)
     def test_lend_book_mocked(self):
         lend_book = Library("books").lend_book("Anrzej", Book("Kordian", "Juliusz Slowacki", 753, 12))
+        notification = NotificationSystem.send_notification(self, "Anrzej", "notification")
         self.assertEqual(lend_book, "Book was lended")
+        self.assertEqual(notification, "Notification that book was lended")
 
 class TestLendNotAvailableBook(unittest.TestCase):
     def test_lend_not_available_book(self):
@@ -86,10 +93,16 @@ class TestReturnBook(unittest.TestCase):
     def mocked_return_test_return_book(*args, **kwargs):
         return "Book was returned"
     
+    def mocked_send_notification(*args, **kwargs):
+        return "Notification that book was returned"
+    
+    @mock.patch("library.NotificationSystem.send_notification", new=mocked_send_notification)
     @mock.patch("library.Library.return_book", new=mocked_return_test_return_book)
     def test_return_book_mocked(self):
         return_book = Library("books").return_book("Anrzej", Book("Psy", "Waldemar Morawiec", 997, 12))
+        notification = NotificationSystem.send_notification(self, "Anrzej", "notification")
         self.assertEqual(return_book, "Book was returned")
+        self.assertEqual(notification, "Notification that book was returned")
         
 class TestReturnBookNotLended(unittest.TestCase):
     def test_return_book_not_lended(self):
