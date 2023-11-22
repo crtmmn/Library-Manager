@@ -66,3 +66,9 @@ class Library:
                 return "Book was returned"
         else:
             return "User with this name doesn't have that book to return"
+            
+class NotificationSystem:
+    def __init__(self):
+        pass
+    def send_notification(self, user, message):
+        pass
